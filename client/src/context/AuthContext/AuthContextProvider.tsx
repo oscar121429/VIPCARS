@@ -5,7 +5,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-export const AuthProvider = ({ children }: Props) => {
+export const AuthContextProvider = ({ children }: Props) => {
   const [user, setUser] = useState<string | null>(null);
 
   const login = (username: string) => setUser(username);
