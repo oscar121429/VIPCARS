@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Italianno&display=swap');
+
+
+.navbar-custtom{
+  background-color: rgb(212, 208, 208);
+  padding-left: 0;
+}
+
+.logo {
+  font-family: 'Italianno', cursive;
+}
+
+.nav-btn{
+   background-color: #246B64;
+  border: none;
+  color: #FFFFFF;
+  padding: 9px 18px;
+  font-size: 13px;
+  border-radius: 18px;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.nav-btn:hover {
+  background-color: #5a9f96;
+  transform: translateY(-1px);
+}
