@@ -5,6 +5,8 @@ import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 import { fileURLToPath } from 'url';
 
+import userRouter from "./modules/user/user.routes.js"
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -16,6 +18,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/user', userRouter);
 
 // app.use('/users', usersRouter);
 
