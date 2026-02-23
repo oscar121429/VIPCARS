@@ -3,6 +3,7 @@ import express from 'express';
 import path from 'path';
 import logger from 'morgan';
 import cookieParser from 'cookie-parser';
+import cors from "cors";
 import { fileURLToPath } from 'url';
 
 import userRouter from "./modules/user/user.routes.js"
@@ -12,7 +13,7 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
-
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -21,7 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/user', userRouter);
 
-// app.use('/users', usersRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

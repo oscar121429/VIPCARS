@@ -1,17 +1,20 @@
-.register-page {
-  min-height: 100vh;
+body {
+  
+  font-family: "Raleway", sans-serif;
+}
+
+.login-page {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding-top: 140px;
-  padding-bottom: 140px;
-  position: relative;
+  padding-top: 100px;
+  padding-bottom: 128px;
 }
 
-.register-card {
+.login-card {
   background-color: #A6C8B7;
-  width: 600px;
-  padding: 3rem 3rem 2.8rem;
+  width: 620px;
+  padding: 3.5rem 3.2rem 3rem;
   border-radius: 32px;
   box-shadow:
     0 0 0 4px #246B64,
@@ -20,15 +23,15 @@
   animation: cardIn 0.8s ease-out both;
 }
 
-.register-card h2 {
+
+
+.login-card h2 {
   text-align: center;
-  margin-bottom: 2.6rem;
+  margin-bottom: 3rem;
   color: #246B64;
-  font-family: "Raleway", sans-serif;
+  font-family: "Lora", serif;
   font-weight: bold;
-  font-size: 2.4rem;
-  letter-spacing: 0.45em;
-  line-height: 1.3;
+  font-size: 2.6rem;
 }
 
 .field {
@@ -36,36 +39,35 @@
   flex-direction: column;
   align-items: center;
   font-weight: bold;
-  margin-bottom: 1.1rem;
+  margin-bottom: 1.4rem;
   gap: 6px;
-  color: white;
 }
 
 .field input {
   width: 100%;
   max-width: 420px;
-  padding: 10px 14px;
+  padding: 12px 16px;
   border: 1px solid #6bb3a7;
-  border-radius: 12px;
+  border-radius: 14px;
   background: #ffffff;
   font-size: 14px;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
   transition: all 0.25s ease;
 }
 
 .field input::placeholder {
-  color: #6bb3a789;
+  color: #6bb3a788;
 }
 
 .field input:focus {
   outline: none;
-  box-shadow: 0 6px 18px rgba(107, 179, 167, 0.25);
+  box-shadow: 0 6px 18px rgba(107, 179, 167, 0.35);
   transform: translateY(-1px);
 }
 
 .field input:hover {
-  box-shadow: 0 6px 18px rgba(107, 179, 167, 0.2);
+  box-shadow: 0 6px 18px rgba(107, 179, 167, 0.25);
 }
 
 .text-danger {
@@ -74,20 +76,16 @@
   text-align: center;
 }
 
-.text-center {
-  text-align: center;
-}
-
 .buttons {
   display: flex;
   justify-content: center;
-  gap: 1.4rem;
-  margin: 2.4rem 0 1.4rem;
+  gap: 1.6rem;
+  margin: 2.6rem 0 1.6rem;
 }
 
 .button_register {
   border: none;
-  padding: 12px 34px;
+  padding: 13px 38px;
   border-radius: 30px;
   cursor: pointer;
   font-size: 14px;
@@ -122,12 +120,56 @@
   transform: translateY(-2px);
 }
 
-.register-phrase {
+.not-registered {
   text-align: center;
-  margin-top: 0.8rem;
-  color: #4a2e24;
-  font-family: "Lora", serif;
-  font-weight: bold;
-  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 0.6rem;
+  color: #1f1f1f;
 }
 
+.register-link {
+  color: #246B64;
+  font-weight: 800;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.register-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .login-page {
+    padding-top: 80px;
+    padding-bottom: 60px;
+  }
+
+  .login-card {
+    width: 90%;
+    padding: 2.6rem 2.2rem;
+  }
+
+  .field input {
+    max-width: 100%;
+  }
+
+  .buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .button_register {
+    width: 100%;
+  }
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

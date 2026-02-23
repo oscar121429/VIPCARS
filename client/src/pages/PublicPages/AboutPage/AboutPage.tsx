@@ -5,8 +5,7 @@ const AboutPage = () => {
   return (
     <div className="about">
 
-      <section className="about__block">
-        <div className="about__img about__img--1"></div>
+      <section className="about__block about__img--1 about__block--right">
 
         <div className="about__text">
           <h2>Nuestra historia</h2>
@@ -24,8 +23,8 @@ const AboutPage = () => {
         </div>
       </section>
 
-      <section className="about__block about__block--reverse">
-        <div className="about__img about__img--2"></div>
+      <section className="about__block about__img--2">
+        
 
         <div className="about__text">
           <h2>Nuestra comunidad</h2>
