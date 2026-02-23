@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router';
 import { registerSchema } from '../../../../schemas/RegisterSchema';
 import { ZodError } from 'zod';
 import type { RegisterErrors, RegisterForm } from '../../../../types/register.types';
+import { fetchData } from '../../../../helpers/axiosHelper/axiosHelper';
+import { ModalVerifyEmail } from '../../../../components/Modal/ModalVerifyEmail/ModalVerifyEmail';
 
 
 
@@ -50,7 +52,18 @@ const RegisterPage = () => {
 
     try {
       registerSchema.parse(register);
-      setOpenModal(true);
+     
+
+      //llamada api
+      const res = await fetchData<typeof register>({
+        url: "user/register",
+        method: "POST",
+        data: register,
+      });
+
+       setOpenModal(true);
+      navigate('/login')
+
 
     } catch (error) {
 
@@ -201,6 +214,16 @@ const RegisterPage = () => {
           </div>
 
         </form>
+
+       {openModal && (
+          <ModalVerifyEmail
+            onClose={() => {
+              setOpenModal(false);
+              navigate("/login");
+            }}
+          />
+        )}
+
       </div>
     </section>
   )

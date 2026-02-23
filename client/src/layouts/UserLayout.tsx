@@ -1,11 +1,12 @@
-import React from 'react'
+
 import { Outlet } from 'react-router'
+import { NavbarPrivado } from '../components/NavbarPrivado/NavbarPrivado'
 
 export const UserLayout = () => {
   return (
    <>
     <header>
-     <h1>Navbar user/privado</h1>
+     <NavbarPrivado />
     </header>
     <main className='main-user'>
       <Outlet/>
