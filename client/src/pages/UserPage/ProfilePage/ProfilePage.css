@@ -1,0 +1,136 @@
+ .clientProfilePage {
+  padding: 40px 20px 80px;
+  font-family: "Raleway", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+ 
+
+.infoCard {
+  width: 100%;
+  max-width: 900px;
+  border-radius: 18px;
+  padding: 32px;
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  
+}
+
+.infoLeft {
+  flex: 1;
+}
+
+.infoHeader {
+  display: flex;
+  align-items: center;
+  gap: 70px;
+  margin-bottom: 16px;
+  justify-content: center;
+}
+
+.infoTitle {
+  font-size: 29px;
+  color: #246B64;
+  margin: 0;
+}
+
+.editBtn {
+  background: transparent;
+  border: none;
+  color: #246B64;
+  font-weight: 700;
+  font-size: 20px;
+  padding: 9px 10px;
+  border-radius: 50rem;
+  cursor: pointer;
+  transition:
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+}
+
+.editBtn:hover {
+  color: white;
+  background-color: #246B64;
+}
+
+.editBtn:focus-visible {
+  outline: none;
+  background-color: rgba(166, 200, 183, 0.35);
+  box-shadow: 0 0 0 0.25rem rgba(107, 179, 167, 0.45);
+}
+
+.editBtn:active {
+  background-color: rgba(166, 200, 183, 0.5);
+}
+
+
+
+@media (max-width: 768px) {
+  .editBtn {
+    font-size: 13px;
+    padding: 4px 12px;
+  }
+}
+
+.infoTableWrap {
+  background: #A6C8B7;
+  border-radius: 20px;
+  padding: 18px 20px;
+}
+
+.infoTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.infoTable td {
+  background: transparent;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.infoTable tr:last-child td {
+  border-bottom: none;
+}
+
+.infoKey {
+  font-weight: 600;
+  color: #6a5a50;
+}
+
+.infoValue {
+  text-align: right;
+  font-weight: 500;
+}
+
+.userPhoto {
+  width: 260px;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #777;
+}
+
+ .clientProfileCars {
+  padding: 40px 20px 80px;
+  font-family: "Raleway", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.conteiner-car{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3rem;
+}

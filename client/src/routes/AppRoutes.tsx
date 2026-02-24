@@ -8,20 +8,22 @@ import { AdminLayout } from '../layouts/AdminLayout'
 import { useAuth } from '../context/AuthContext/useAuth'
 
 //paginas públicas 
-const HomePage = lazy(()=> import("../pages/PublicPages/HomePage/HomePage"))
-const AboutPage = lazy(()=> import("../pages/PublicPages/AboutPage/AboutPage"))
-const ErrorPage = lazy(()=> import("../pages/PublicPages/ErrorPage/ErrorPage"))
-const RegisterPage = lazy(()=> import("../pages/PublicPages/AuthPage/RegisterPage/RegisterPage"))
-const LoginPage = lazy(()=> import("../pages/PublicPages/AuthPage/LoginPage/LoginPage"))
+const HomePage = lazy(()=> import("../pages/PublicPages/HomePage/HomePage"));
+const AboutPage = lazy(()=> import("../pages/PublicPages/AboutPage/AboutPage"));
+const ErrorPage = lazy(()=> import("../pages/PublicPages/ErrorPage/ErrorPage"));
+const RegisterPage = lazy(()=> import("../pages/PublicPages/AuthPage/RegisterPage/RegisterPage"));
+const LoginPage = lazy(()=> import("../pages/PublicPages/AuthPage/LoginPage/LoginPage"));
 
 //páginas privadas user
-const RedSocial = lazy(()=>import("../pages/UserPage/RedSocial/RedSocial"))
-const ProfilePage = lazy(()=>import("../pages/UserPage/ProfilePage/ProfilePage"))
-const OneCarPage = lazy(()=>import("../pages/UserPage/OneCarPage/OneCarPage"))
-const OneUserPage = lazy(()=>import("../pages/UserPage/OneUserPage/OneUserPage"))
+const RedSocial = lazy(()=>import("../pages/UserPage/RedSocial/RedSocial"));
+const ProfilePage = lazy(()=>import("../pages/UserPage/ProfilePage/ProfilePage"));
+const OneCarPage = lazy(()=>import("../pages/UserPage/OneCarPage/OneCarPage"));
+const OneUserPage = lazy(()=>import("../pages/UserPage/OneUserPage/OneUserPage"));
+const EditUserPage = lazy(()=>import("../pages/UserPage/EditUserPage/EditUserPage"));
+const AddCarPage = lazy(()=>import("../pages/UserPage/AddCarPage/AddCarPage"));
 
 //página privada Admin
-const ManagePage = lazy(()=>import("../pages/AdminPage/ManagePage/ManagePage"))
+const ManagePage = lazy(()=>import("../pages/AdminPage/ManagePage/ManagePage"));
 
 export const AppRoutes = () => {
  const {user} = useAuth();
@@ -49,6 +51,8 @@ export const AppRoutes = () => {
           <Route path='/profile' element={<ProfilePage/>} />
           <Route path='/oneCar' element={<OneCarPage />} />
           <Route path='/oneUser' element={<OneUserPage/>} />
+          <Route path='/editUser' element={<EditUserPage/>} />
+          <Route path='/addCar' element={<AddCarPage/>} />
 
           </Route>
         </Route>

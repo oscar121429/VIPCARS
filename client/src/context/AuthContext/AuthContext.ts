@@ -4,10 +4,10 @@ import type { Car, User } from "../../types/auth.types";
 export interface AuthContextType {
   user: User | null;
   token: string | null;
-  car: Car[] | null;
+  car: Car[];
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
   setToken: React.Dispatch<React.SetStateAction<string | null>>;
-  setCar: React.Dispatch<React.SetStateAction<Car[] | null>>;
+  setCar: React.Dispatch<React.SetStateAction<Car[]>>;
   logout: () => void;
 }
 
