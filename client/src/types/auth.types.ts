@@ -18,4 +18,5 @@ export interface Car {
   number_of_owners:number;
   kilometres:number;
   description: string;
+  user_id:number;
 }

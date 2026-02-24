@@ -122,14 +122,42 @@ class UserController {
       const { user_id } = req;
       
       const result = await userDal.userByToken(user_id);
+     
       
-      res.status(200).json({ message: "Usuario cargado", user: result[0] });
+      res.status(200).json({ message: "Usuario cargado",
+        user: result.user,
+        car: result.car
+       });
+
+       
+       
  
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: 'Error al cargar el usuario' });
     }
   };
+
+  editUser = async(req, res)=>{
+    try {
+      const {name_user, last_name, city, province, phone, user_id} = JSON.parse(req.body.editUser);
+      let values = [name_user, last_name, city, province, phone, user_id]
+
+      if(req.file){
+        values = [name_user, last_name, city, province, phone, req.file.filename, user_id]
+      }
+
+      await userDal.editUser(values);
+
+         res.status(200).json({
+        message: "update oki",
+        newAvatar: req.file?.filename
+      })
+    } catch (error) {
+      console.log(error);
+       res.status(500).json(error)
+    }
+  }
 
 }
 

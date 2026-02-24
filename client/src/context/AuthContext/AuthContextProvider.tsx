@@ -13,7 +13,7 @@ type Props = {
 export const AuthContextProvider = ({ children }: Props) => {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
-   const [car, setCar] = useState<Car[] | null>(null);
+   const [car, setCar] = useState<Car[]>([]);
 
   
   
@@ -26,7 +26,7 @@ export const AuthContextProvider = ({ children }: Props) => {
     if (!tokenLS) {
       setUser(null);
       setToken(null);
-      setCar(null);
+      setCar([]);
       return;
     }
 
@@ -46,7 +46,7 @@ export const AuthContextProvider = ({ children }: Props) => {
       console.log(error);
       setUser(null);
       setToken(null);
-      setCar(null);
+      setCar([]);
       localStorage.removeItem("token");
     }
   };
