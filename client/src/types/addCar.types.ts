@@ -1,3 +1,5 @@
+
+
 export interface CreateCarDTO {
   model: string
   year: number
@@ -15,6 +17,11 @@ export type CarFormErrors = {
   kilometres?: string
   description?: string
   pictures?: string
+}
+
+export interface CreateCarResponse {
+  message: string;
+  carId: number;
 }
 
 export type CarPictures = File[]

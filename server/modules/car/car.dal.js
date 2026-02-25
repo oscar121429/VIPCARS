@@ -1,4 +1,4 @@
-import { dbPool } from "../../config/db.js";
+import executeQuery, { dbPool } from "../../config/db.js";
 
 class CarDal {
 
@@ -45,6 +45,91 @@ class CarDal {
       }
     }
 
+  }
+
+  getImages = async (car_id) => {
+    try {
+      let sql = 'SELECT * FROM gallery WHERE image_is_deleted = 0 AND car_id = ?'
+      const result = await executeQuery(sql, [car_id]);
+
+
+      return result;
+    } catch (error) {
+      throw error
+    }
+  }
+
+  addPictures = async (files, car_id) => {
+    const connection = await dbPool.getConnection();
+    try {
+      await connection.beginTransaction();
+      //averiguar cual es el image_id mas alto
+      let sql = 'SELECT IFNULL(MAX(image_id), 0) AS max_id FROM gallery WHERE car_id=?'
+
+      let [result] = await connection.query(sql, [car_id]);
+      let maxId = result[0].max_id;
+
+      //hacer un bucle para insertar todas las fotos
+      files.forEach(async elem => {
+        maxId++
+        let sqlImages = 'INSERT INTO gallery (car_id, image_id, file) VALUES (?,?,?)'
+        let values = [car_id, maxId, elem.filename];
+        await connection.query(sqlImages, values)
+      })
+
+      let sqlUpdateFiles = 'SELECT * FROM gallery WHERE car_id=? AND image_is_deleted = 0'
+      let [updatePics] = await connection.query(sqlUpdateFiles, [car_id])
+
+      await connection.commit();
+      return updatePics
+    } catch (error) {
+      await connection.rollback();
+      throw error
+
+    } finally {
+      //cerrar la conexion
+      if (connection) {
+        connection.release();
+      }
+    }
+  }
+
+  delImage = async (values) => {
+    try {
+      let sql = 'DELETE FROM gallery WHERE image_id=? AND car_id=?'
+      await executeQuery(sql, values)
+    } catch (error) {
+      throw error
+    }
+  }
+
+  delLogicCar = async (car_id) => {
+    try {
+      let sql = 'UPDATE car LEFT JOIN gallery ON car.car_id = gallery.car_id SET car.car_is_deleted = 1, gallery.image_is_deleted = 1 WHERE car.car_id = ?'
+      await executeQuery(sql, [car_id]);
+    } catch (error) {
+      throw error
+    }
+  }
+
+  updateCar = async (values) => {
+    try {
+      let sql = `UPDATE car
+   SET 
+      model = ?,
+      year = ?,
+      price = ?,
+      number_of_owners = ?,
+      kilometres = ?,
+      description = ?
+   WHERE car_id = ?
+   AND car_is_deleted = 0`
+
+      let result = await executeQuery(sql, values);
+      return result;
+    } catch (error) {
+      throw error
+    }
   }
 
 }

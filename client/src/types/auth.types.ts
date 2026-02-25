@@ -11,7 +11,7 @@ export interface User {
 }
 
 export interface Car {
-  car_id: string;
+  car_id:  number;
   model: string;
   year: number;
   price:number;
@@ -19,4 +19,9 @@ export interface Car {
   kilometres:number;
   description: string;
   user_id:number;
+}
+
+export interface UpdateCarResponse {
+  message: string;
+  updatedCar: Car;
 }

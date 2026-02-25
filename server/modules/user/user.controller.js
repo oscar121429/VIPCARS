@@ -159,6 +159,16 @@ class UserController {
     }
   }
 
+  allUsersCars = async(req, res)=>{
+    try {
+      let result = await userDal.allUsersCars();
+      res.status(200).json({message: "datos recibidos", result})
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+
 }
 
 export default new UserController();

@@ -32,7 +32,7 @@ export const AuthContextProvider = ({ children }: Props) => {
 
     try {
 
-      const resUser = await fetchData<never, UserByTokenResponse>({
+      const resUser = await fetchData< UserByTokenResponse>({
         url: "user/userByToken",
         method: "GET",
         token: tokenLS,
@@ -59,7 +59,7 @@ export const AuthContextProvider = ({ children }: Props) => {
     const logout = () => {
     setUser(null);
     setToken(null);
-    setCar(null);
+    setCar([]);
     localStorage.removeItem("token");
   };
 

@@ -1,0 +1,76 @@
+
+.gallery-container {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+}
+
+.img-wrapper {
+  position: relative;   /* 🔥 ESTO ES LO IMPORTANTE */
+  
+}
+
+.car-image {
+  width: 200px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.delete-img-icon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: crimson;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.add-img-card {
+  width: 150px;
+  height: 120px;
+  background-color: #dcdcdc;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.add-icon {
+  font-size: 2rem;
+  color: #555;
+}
+
+.button_register {
+  border: none;
+  padding: 10px 32px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  transition: all 0.3s ease;
+}
+
+.button_register.acept {
+  background: #246B64;
+  color: white;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.button_register.acept:hover {
+  transform: translateY(-2px) scale(1.03);
+  opacity: 0.9;
+}
+
+.button_register.cancel {
+  background: #c56f6f;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.button_register.cancel:hover {
+  transform: translateY(-2px);
+}

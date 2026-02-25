@@ -5,6 +5,11 @@ import carController from './car.controller.js';
 
 const router = express.Router();
 
-router.post('/newCar', verifyToken, uploadImages("cars"), carController.newCar)
+router.post('/newCar', verifyToken, uploadImages("cars"), carController.newCar);
+router.get('/getImages/:car_id', verifyToken, carController.getImages);
+router.post('/addPictures/:car_id', verifyToken, uploadImages("cars"), carController.addPictures);
+router.post('/delImage', verifyToken, carController.delImage);
+router.put('/delLogicCar/:car_id', verifyToken, carController.delLogicCar);
+router.put('/updateCar/:car_id', verifyToken, carController.updateCar);
 
 export default router;
