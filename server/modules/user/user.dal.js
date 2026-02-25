@@ -72,9 +72,7 @@ WHERE u.user_id = ?
 
 GROUP BY c.car_id;`;
       let result = await executeQuery(sql, [id]);
-      console.log('🔍 userByToken result:', result);
-      console.log('📊 result length:', result.length);
-      
+     
       const car = []
       const user = {
         user_id: result[0].user_id,
@@ -89,7 +87,6 @@ GROUP BY c.car_id;`;
       }
 
        result.forEach(e => {
-        console.log('🚗 Iterando elemento:', e.car_id, e.model);
         if (e.car_id) {
           car.push({
             user_id: e.user_id,
@@ -103,7 +100,7 @@ GROUP BY c.car_id;`;
           })
         }
       })
-      console.log('✅ Final car array:', car);
+     
 
       return {user, car};
     } catch (error) {
@@ -122,6 +119,37 @@ GROUP BY c.car_id;`;
       }
 
       await executeQuery(sql, values);
+    } catch (error) {
+      throw error
+    }
+  }
+
+  allUsersCars = async()=>{
+    try {
+      let sql = `SELECT 
+    u.user_id,
+    u.name_user,
+    u.last_name,
+    u.picture_user,
+    c.car_id,
+    c.model,
+    c.year,
+    c.price,
+    MIN(g.file) AS file
+FROM users AS u
+JOIN car AS c
+    ON u.user_id = c.user_id
+JOIN gallery AS g
+    ON c.car_id = g.car_id
+WHERE 
+    u.is_deleted = 0
+    AND c.car_is_deleted = 0
+    AND g.image_is_deleted = 0
+GROUP BY 
+    c.car_id, u.user_id`
+
+    let result = await executeQuery(sql);
+    return result
     } catch (error) {
       throw error
     }

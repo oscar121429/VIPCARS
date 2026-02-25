@@ -21,6 +21,7 @@ const OneCarPage = lazy(()=>import("../pages/UserPage/OneCarPage/OneCarPage"));
 const OneUserPage = lazy(()=>import("../pages/UserPage/OneUserPage/OneUserPage"));
 const EditUserPage = lazy(()=>import("../pages/UserPage/EditUserPage/EditUserPage"));
 const AddCarPage = lazy(()=>import("../pages/UserPage/AddCarPage/AddCarPage"));
+const EditCarPage = lazy(()=>import("../pages/UserPage/EditCarPage/EditCarPage"));
 
 //página privada Admin
 const ManagePage = lazy(()=>import("../pages/AdminPage/ManagePage/ManagePage"));
@@ -53,6 +54,7 @@ export const AppRoutes = () => {
           <Route path='/oneUser' element={<OneUserPage/>} />
           <Route path='/editUser' element={<EditUserPage/>} />
           <Route path='/addCar' element={<AddCarPage/>} />
+          <Route path='/editCar/:car_id' element={<EditCarPage/>} />
 
           </Route>
         </Route>

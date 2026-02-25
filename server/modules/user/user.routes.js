@@ -9,6 +9,7 @@ router.post("/register", userController.register);
 router.get("/verifyEmail/:token", userController.verifyEmail);
 router.post("/login", userController.login);
 router.get("/userByToken", verifyToken, userController.userByToken);
-router.put("/editUser", verifyToken, uploadImage("users"), userController.editUser)
+router.put("/editUser", verifyToken, uploadImage("users"), userController.editUser);
+router.get("/allUsersCars", verifyToken, userController.allUsersCars);
 
 export default router;

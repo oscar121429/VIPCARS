@@ -1,22 +1,19 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 
 const apiUrl = import.meta.env.VITE_SERVER_URL;
 
-
-
-interface FetchDataProps<T = unknown> {
+interface FetchDataProps<B = unknown> {
   url: string;
   method: string;
-  data?: T;
+  data?: B;
   token?: string | null;
 }
 
-export const fetchData = async <T = unknown, R = unknown>({
-  url,
-  method,
-  data,
-  token,
-}: FetchDataProps<T>): Promise<R> => {
+export const fetchData = async <R = unknown, B = unknown>(
+  props: FetchDataProps<B>
+): Promise<R> => {
+
+  const { url, method, data, token } = props;
 
   const headers: Record<string, string> = {};
 
@@ -24,14 +21,14 @@ export const fetchData = async <T = unknown, R = unknown>({
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-   const config = {
-      url: apiUrl + url,
-      method,
-      data,
-      headers
-    }
+  const config: AxiosRequestConfig<B> = {  // 👈 IMPORTANTE
+    url: apiUrl + url,
+    method,
+    data,
+    headers
+  };
 
-  const res = await axios(config);
-  
+  const res = await axios.request<R>(config);
+
   return res.data;
 };

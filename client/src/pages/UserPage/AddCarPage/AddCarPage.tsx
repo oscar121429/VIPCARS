@@ -1,18 +1,19 @@
 import React, { useState } from 'react'
 import "./AddCarPage.css"
-import { CarFormErrors, CarPictures, CreateCarDTO } from '../../../types/addCar.types';
+import type { CarFormErrors, CarPictures, CreateCarDTO, CreateCarResponse } from '../../../types/addCar.types';
 import { useNavigate } from 'react-router';
 import { validateCar } from '../../../schemas/AddCarScherma';
 import { fetchData } from '../../../helpers/axiosHelper/axiosHelper';
 import { useAuth } from '../../../context/AuthContext/useAuth';
+import type { Car } from '../../../types/auth.types';
 
 const initialValue: CreateCarDTO = {
-    model: '',
-    year: new Date().getFullYear(),
-    price: 0,
-    number_of_owners: 0,
-    kilometres: 0,
-    description: ''
+  model: '',
+  year: new Date().getFullYear(),
+  price: 0,
+  number_of_owners: 0,
+  kilometres: 0,
+  description: ''
 }
 
 const AddCarPage = () => {
@@ -20,7 +21,7 @@ const AddCarPage = () => {
   const [pictures, setPictures] = useState<CarPictures>([]);
   const [errors, setErrors] = useState<CarFormErrors>({})
 
- const {token, user, car, setCar} = useAuth();
+  const { token, user, setCar } = useAuth();
 
   const navigate = useNavigate();
 
@@ -31,7 +32,7 @@ const AddCarPage = () => {
     const target = e.target
     const name = target.name as keyof CreateCarDTO
 
-    // 🔴 Caso imágenes
+    //  Caso imágenes
     if (target instanceof HTMLInputElement && target.type === 'file') {
 
       if (!target.files) return
@@ -39,7 +40,7 @@ const AddCarPage = () => {
       return
     }
 
-    // 🟢 Caso normal
+    //  Caso normal
     const value = target.value
 
     setNewCar(prev => ({
@@ -60,61 +61,58 @@ const AddCarPage = () => {
   }
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault()
+    e.preventDefault()
 
-  try {
+    try {
 
-    // 🟨 VALIDACIÓN
-    const validationErrors = validateCar(newCar, pictures)
+      //  VALIDACIÓN
+      const validationErrors = validateCar(newCar, pictures)
 
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors)
-      return
-    }
-
-    const formData = new FormData()
-
-    // 🟩 OBJETO COMO JSON
-    formData.append("newCar", JSON.stringify(newCar));
-
-    // 🟦 IMÁGENES
-    if (pictures && pictures.length > 0) {
-      for (const elem of pictures) {
-        formData.append("img", elem)
+      if (Object.keys(validationErrors).length > 0) {
+        setErrors(validationErrors)
+        return
       }
+
+      const formData = new FormData()
+
+      //  OBJETO COMO JSON
+      formData.append("newCar", JSON.stringify(newCar));
+
+      //  IMÁGENES
+      if (pictures && pictures.length > 0) {
+        for (const elem of pictures) {
+          formData.append("img", elem)
+        }
+      }
+
+      const res = await fetchData<CreateCarResponse, FormData>({
+        url: "car/newCar",
+        method: "POST",
+        data: formData,
+        token
+      })
+
+      //pendiente el seteo de car
+      // construir objeto Car mínimo con el id devuelto
+      const createdCar = {
+        car_id: res.carId,
+        model: newCar.model,
+        year: newCar.year,
+        price: newCar.price,
+        number_of_owners: newCar.number_of_owners,
+        kilometres: newCar.kilometres,
+        description: newCar.description,
+        user_id: Number(user?.user_id ?? 0)
+      } as Car
+
+      setCar(prev => [...prev, createdCar])
+
+      navigate('/profile')
+
+    } catch (error) {
+      console.log(error)
     }
-
-    const res = await fetchData<FormData>({ 
-      url: "car/newCar",
-      method: "POST",
-      data: formData,
-      token
-    })
-
-    console.log("como se esta creando el coche", res);
-    
-
-    //pendiente el seteo de car
-    // supondremos que res.carId contiene el id del coche creado
-/* if (res && res.carId) {
-  const created = {
-    car_id: String(res.carId),
-    model: newCar.model,
-    year: newCar.year,
-    price: newCar.price,
-    number_of_owners: newCar.number_of_owners,
-    kilometres: newCar.kilometres,
-    description: newCar.description
-  };
-  setCar(prev => prev ? [created, ...prev] : [created]);
-} */
-
-    navigate('/profile')
-
-  } catch (error) {
-    console.log(error)
   }
-}
 
   return (
     <section className='register-page'>
@@ -143,7 +141,7 @@ const AddCarPage = () => {
               value={newCar.year}
               onChange={handleChange}
               placeholder='Introduce año de matriculación' />
-              {errors.year && <span className="error">{errors.year}</span>}
+            {errors.year && <span className="error">{errors.year}</span>}
           </div>
 
 
@@ -157,7 +155,7 @@ const AddCarPage = () => {
               value={newCar.price}
               onChange={handleChange}
               placeholder='Introduce el precio' />
-              {errors.price && <span className="error">{errors.price}</span>}
+            {errors.price && <span className="error">{errors.price}</span>}
           </div>
 
           <div className="field">
@@ -169,7 +167,7 @@ const AddCarPage = () => {
               value={newCar.number_of_owners}
               onChange={handleChange}
               placeholder='Introduce el número de propietarios' />
-              {errors.number_of_owners && <span className="error">{errors.number_of_owners}</span>}
+            {errors.number_of_owners && <span className="error">{errors.number_of_owners}</span>}
           </div>
 
           <div className="field">
@@ -181,7 +179,7 @@ const AddCarPage = () => {
               value={newCar.kilometres}
               onChange={handleChange}
               placeholder='Kilómetros' />
-              {errors.kilometres && <span className="error">{errors.kilometres}</span>}
+            {errors.kilometres && <span className="error">{errors.kilometres}</span>}
           </div>
 
           <div className="field">
@@ -192,7 +190,7 @@ const AddCarPage = () => {
               value={newCar.description}
               onChange={handleChange}
               placeholder='Descripción del coche' />
-              {errors.description && <span className="error">{errors.description}</span>}
+            {errors.description && <span className="error">{errors.description}</span>}
           </div>
 
           <div className="field">
