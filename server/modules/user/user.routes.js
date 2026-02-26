@@ -11,5 +11,7 @@ router.post("/login", userController.login);
 router.get("/userByToken", verifyToken, userController.userByToken);
 router.put("/editUser", verifyToken, uploadImage("users"), userController.editUser);
 router.get("/allUsersCars", verifyToken, userController.allUsersCars);
+router.get("/userById/:user_id", verifyToken, userController.userById);
+
 
 export default router;

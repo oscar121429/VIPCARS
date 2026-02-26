@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router";
 import type { SocialCar } from "../../types/SocialCar.types";
 import "./CardCar.css"
 
@@ -6,20 +7,23 @@ type Props = {
 };
 
 export const CardCar = ({car}:Props) => {
+  const navigate = useNavigate();
   return (
     <article className="social-card">
 
-      {/* Imagen del coche */}
+      
       <div className="car-header-img">
         <img 
+        onClick={()=>navigate(`/oneCar/${car.car_id}`)}
           src={`${import.meta.env.VITE_SERVER_IMAGES}/cars/${car.file}`} 
           alt="car"
         />
       </div>
 
-      {/* Info usuario */}
+      
       <div className="user-info">
         <img
+        onClick={()=>navigate(`/oneUser/${car.user_id}`)}
           className="user-avatar"
           src={`${import.meta.env.VITE_SERVER_IMAGES}/users/${car.picture_user}`}
           alt="user"
@@ -29,7 +33,7 @@ export const CardCar = ({car}:Props) => {
         </p>
       </div>
 
-      {/* Info coche */}
+      
       <div className="car-data">
         <h2>{car.model}</h2>
         <p className="price">{car.price} €</p>

@@ -50,8 +50,8 @@ export const AppRoutes = () => {
 
           <Route path='/social' element={<RedSocial/>} />
           <Route path='/profile' element={<ProfilePage/>} />
-          <Route path='/oneCar' element={<OneCarPage />} />
-          <Route path='/oneUser' element={<OneUserPage/>} />
+          <Route path='/oneCar/:car_id' element={<OneCarPage />} />
+          <Route path='/oneUser/:user_id' element={<OneUserPage/>} />
           <Route path='/editUser' element={<EditUserPage/>} />
           <Route path='/addCar' element={<AddCarPage/>} />
           <Route path='/editCar/:car_id' element={<EditCarPage/>} />

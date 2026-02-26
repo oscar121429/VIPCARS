@@ -155,6 +155,31 @@ GROUP BY
     }
   }
 
+  userById = async(user_id)=>{
+    try {
+      let sql = `  SELECT 
+       u.user_id,
+       u.name_user,
+       u.last_name,
+       u.picture_user,
+       g.file
+   FROM users u
+   JOIN car c 
+       ON u.user_id = c.user_id
+   JOIN gallery g 
+       ON c.car_id = g.car_id
+   WHERE u.user_id = ?
+   AND c.car_is_deleted = 0
+   AND g.image_is_deleted = 0
+   AND u.is_deleted = 0`
+      let result = executeQuery(sql, [user_id]);
+      return result
+      
+    } catch (error) {
+      throw error
+    }
+  }
+
  
 
 }

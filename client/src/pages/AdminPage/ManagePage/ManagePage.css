@@ -1,0 +1,93 @@
+/* CONTENEDOR GENERAL */
+
+.adminUsersWrap {
+  width: 90%;
+  max-width: 950px;
+  margin: 60px auto;
+}
+
+/* TABLA */
+
+.adminTable {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* CABECERA */
+
+.adminTable thead {
+  background: #A6C8B7;
+}
+
+.adminTable th {
+  padding: 12px;
+  text-align: left;
+  font-size: 13px;
+  color: #4b4b4b;
+}
+
+/* FILAS */
+
+.adminTable td {
+  padding: 10px;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  vertical-align: middle;
+}
+
+.adminTable tr:last-child td {
+  border-bottom: none;
+}
+
+/* CLIENTE (AVATAR + NOMBRE) */
+
+.clientCell {
+  vertical-align: middle;
+}
+
+.clientInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* AVATAR */
+
+.clientAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #ddd;
+}
+
+/* BOTÓN BLOQUEAR */
+
+.blockBtn {
+  background: #e5bcbc;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: 0.2s ease;
+}
+
+.blockBtn:hover {
+  background: #d8a8a8;
+}
+
+@media (max-width: 768px) {
+  .adminTable th,
+  .adminTable td {
+    font-size: 11px;
+    padding: 6px;
+  }
+
+  .clientAvatar {
+    width: 28px;
+    height: 28px;
+  }
+}

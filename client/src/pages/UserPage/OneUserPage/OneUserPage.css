@@ -1,0 +1,53 @@
+.userInfoContainer {
+  width: fit-content;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: 2rem;
+}
+
+.infoTableWrapU {
+  background: #A6C8B7;
+  border-radius: 20px;
+  padding: 18px 20px;
+  width: 100%;
+  max-width: 350px;
+}
+
+.infoTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.infoTable td {
+  background: transparent;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.infoTable tr:last-child td {
+  border-bottom: none;
+}
+
+.infoKey {
+  font-weight: 600;
+  color: #6a5a50;
+}
+
+.infoValue {
+  text-align: right;
+  font-weight: 500;
+}
+
+.userPhoto {
+  width: 350px;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 18px;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #777;
+  display: block;
+}
