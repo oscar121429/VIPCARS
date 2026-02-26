@@ -11,5 +11,6 @@ router.post('/addPictures/:car_id', verifyToken, uploadImages("cars"), carContro
 router.post('/delImage', verifyToken, carController.delImage);
 router.put('/delLogicCar/:car_id', verifyToken, carController.delLogicCar);
 router.put('/updateCar/:car_id', verifyToken, carController.updateCar);
+router.get('/carById/:car_id', verifyToken, carController.carById);
 
 export default router;

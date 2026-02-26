@@ -8,6 +8,7 @@ import { fileURLToPath } from 'url';
 
 import userRouter from "./modules/user/user.routes.js"
 import carRouter from "./modules/car/car.routes.js"
+import adminRouter from "./modules/admin/admin.routes.js"
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/user', userRouter);
 app.use('/car', carRouter);
+app.use('/admin', adminRouter);
 
 
 // catch 404 and forward to error handler

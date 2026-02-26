@@ -1,4 +1,4 @@
-import { Col, Container, Row, Table } from "react-bootstrap"
+import { Table } from "react-bootstrap"
 import { useAuth } from "../../../context/AuthContext/useAuth"
 import "./ProfilePage.css"
 import { useNavigate } from "react-router"

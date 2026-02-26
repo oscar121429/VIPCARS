@@ -132,6 +132,35 @@ class CarDal {
     }
   }
 
+  carById = async(car_id)=>{
+    try {
+      let sql = ` SELECT c.car_id,
+  c.model,
+  c.year,
+  c.price,
+  c.number_of_owners,
+  c.kilometres,
+  c.description,
+  MIN(g.file) AS main_image
+FROM car c
+LEFT JOIN gallery g 
+  ON c.car_id = g.car_id
+  AND g.image_is_deleted = 0
+  AND g.file IS NOT NULL
+  AND g.file <> ''
+WHERE c.car_id = ?
+AND c.car_is_deleted = 0
+GROUP BY c.car_id`
+
+      let result = await executeQuery(sql, [car_id]);
+
+      return result
+      
+    } catch (error) {
+      throw error
+    }
+  }
+
 }
 
 export default new CarDal();

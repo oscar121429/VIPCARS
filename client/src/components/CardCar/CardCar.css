@@ -13,6 +13,7 @@
   width: 100%;
   height: 300px;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .car-header-img img {
@@ -34,6 +35,7 @@
   height: 60px;
   border-radius: 50%;
   object-fit: cover;
+  cursor: pointer;
 }
 
 /* Nombre */
