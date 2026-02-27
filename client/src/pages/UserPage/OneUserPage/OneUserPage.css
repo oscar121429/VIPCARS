@@ -1,5 +1,7 @@
 .userInfoContainer {
-  width: fit-content;
+  /* width: fit-content; */
+   width: 100%;
+  max-width: 350px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -10,20 +12,34 @@
 
 .infoTableWrapU {
   background: #A6C8B7;
-  border-radius: 20px;
-  padding: 18px 20px;
+  border-radius: 24px;
+  padding: 20px;
   width: 100%;
-  max-width: 350px;
+  max-width: 420px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
 .infoTable {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+}
+
+.infoTable tr {
+  background: rgba(255,255,255,0.45);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: 0.2s ease;
+}
+
+.infoTable tr:hover {
+  transform: scale(1.02);
+  background: rgba(255,255,255,0.65);
 }
 
 .infoTable td {
-  background: transparent;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 12px 14px;
+  border-bottom: none;
 }
 
 .infoTable tr:last-child td {
@@ -31,13 +47,17 @@
 }
 
 .infoKey {
-  font-weight: 600;
-  color: #6a5a50;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #4f4038;
 }
 
 .infoValue {
   text-align: right;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 700;
+  color: #1f3e3a;
 }
 
 .userPhoto {
@@ -50,4 +70,84 @@
   font-weight: 600;
   color: #777;
   display: block;
+}
+
+.button_register {
+  border: none;
+  padding: 12px 34px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  transition: all 0.3s ease;
+}
+
+.button_register.acept {
+  background: #246B64;
+  color: white;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.button_register.acept:hover {
+  transform: translateY(-2px) scale(1.03);
+  opacity: 0.9;
+}
+
+.button_register.acept:active {
+  transform: translateX(2px) translateY(2px);
+  box-shadow: none;
+}
+
+@media (max-width: 768px) {
+
+  .userInfoContainer {
+    width: 100%;
+    padding: 0 16px;
+    margin-top: 1rem;
+    gap: 12px;
+  }
+
+  .userPhoto {
+    width: 100%;
+    max-width: 300px;
+    height: 290px;  
+  }
+
+  .infoTableWrapU {
+    width: 100%;
+    max-width: 100%;
+    padding: 14px 16px;
+  }
+
+  .infoTable {
+    width: 100%;
+  }
+
+    .infoTable tr {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 12px;
+  }
+
+  .infoTable td {
+    font-size: 14px;
+    padding: 6px 2px;
+    word-break: break-word;
+  }
+
+  .infoKey {
+    text-align: left;
+    margin-bottom: 3px;
+  }
+
+  .infoValue {
+    text-align: right;
+  }
+
+  .button_register {
+    width: 100px;
+    padding: 10px;
+  }
+
 }

@@ -6,6 +6,7 @@ import carController from './car.controller.js';
 const router = express.Router();
 
 router.post('/newCar', verifyToken, uploadImages("cars"), carController.newCar);
+router.get('/getCarsByUser/:user_id', verifyToken, carController.getCarsByUser);
 router.get('/getImages/:car_id', verifyToken, carController.getImages);
 router.post('/addPictures/:car_id', verifyToken, uploadImages("cars"), carController.addPictures);
 router.post('/delImage', verifyToken, carController.delImage);

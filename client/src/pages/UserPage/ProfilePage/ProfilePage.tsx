@@ -48,9 +48,7 @@ const ProfilePage = () => {
               </Table>
             </div>
           </div>
-        </div>
-
-        <div className="infoRight">
+          <div className="infoRight">
           <div className="userPhoto">
             <span>
               {user && user.picture_user ? (
@@ -69,6 +67,9 @@ const ProfilePage = () => {
             </span>
           </div>
         </div>
+        </div>
+
+        
       </section>
 
       <section className="clientProfileCars">

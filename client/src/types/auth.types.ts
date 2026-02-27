@@ -1,5 +1,7 @@
+import type { Gallery } from "./images.type";
+
 export interface User {
-  user_id: string;
+  user_id: number;
   name_user: string;
   last_name:string
   email: string;
@@ -19,6 +21,10 @@ export interface Car {
   kilometres:number;
   description: string;
   user_id:number;
+}
+
+export interface CarWithImages extends Car {
+  images: Gallery[];
 }
 
 export interface UpdateCarResponse {

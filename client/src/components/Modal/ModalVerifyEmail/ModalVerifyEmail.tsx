@@ -10,7 +10,7 @@ export const ModalVerifyEmail = ({onClose}:ModalVerifyEmailProps) => {
     <section className="verifyEmailModal">
       <div className="verifyEmailGridModal">
         <div className="verifyEmailCardModal">
-          <img src="/img/register/tick.png" alt="tick" />
+          <img src="/images/Register/tick.png" alt="tick" />
           <h3>¡Registro completado!</h3>
           <p>
             Hemos enviado un correo de verificación a tu dirección de email. Por

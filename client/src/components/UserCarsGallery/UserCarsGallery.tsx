@@ -9,10 +9,11 @@ import "./UserCarsGallery.css"
 export const UserCarsGallery = () => {
  const {car, setCar, token} = useAuth();
  const navigate = useNavigate();
+ console.log("queeee vieneee en car", car);
  
  const delLogicCar = async(car_id: Car["car_id"] )=>{
   try {
-    let res = await fetchData({
+     await fetchData({
       url:`car/delLogicCar/${car_id}`,
       method: 'PUT',
       token
@@ -28,7 +29,7 @@ export const UserCarsGallery = () => {
   return (
         <section className="d-flex justify-content-between flex-column gap-3">
 
-      {car?.map((elem) => (
+      {car.map((elem) => (
         <article className="car-card" key={elem.car_id}>
 
           <div className="car-header">
@@ -50,7 +51,7 @@ export const UserCarsGallery = () => {
 
           <div className="car-gallery">
             <CarsPicGallery
-            
+            key={elem.car_id}
             car_id={elem.car_id}
              />
           </div>

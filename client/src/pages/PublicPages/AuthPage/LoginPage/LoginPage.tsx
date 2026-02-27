@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
 import type { LoginErrors, LoginForm, LoginResponse, UserByTokenResponse } from "../../../../types/login.types";
 import { loginSchema } from "../../../../schemas/LoginScherma";
@@ -6,7 +6,7 @@ import { fetchData } from "../../../../helpers/axiosHelper/axiosHelper";
 import { ZodError } from "zod";
 import axios from "axios";
 import "./LoginPage.css"
-import { AuthContext } from "../../../../context/AuthContext/AuthContext";
+import { useAuth } from "../../../../context/AuthContext/useAuth";
 
 
 type InputName = keyof LoginForm;
@@ -27,7 +27,7 @@ const LoginPage = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const [valErrors, setValErrors] = useState<LoginErrors>({});
 
-  const { setUser, setToken } = useContext(AuthContext);
+  const { setUser, setToken } = useAuth();
 
   const navigate = useNavigate();
 
@@ -38,6 +38,13 @@ const LoginPage = () => {
       ...prev,
       [name]: value
     }));
+
+    setValErrors(prev => ({
+      ...prev,
+      [name]: ""
+    }));
+
+    setErrorMsg("");
   };
 
 
@@ -47,14 +54,14 @@ const LoginPage = () => {
     try {
       loginSchema.parse(login);
 
-      const res = await fetchData<LoginForm, LoginResponse>({
+      const res = await fetchData<LoginResponse>({
         url: 'user/login',
         method: 'POST',
         data: login,
       });
       const token = res.token;
 
-      const resUser = await fetchData<never, UserByTokenResponse>({
+      const resUser = await fetchData<UserByTokenResponse>({
         url: "user/userByToken",
         method: "GET",
         token,
@@ -62,11 +69,14 @@ const LoginPage = () => {
 
 
       localStorage.setItem("token", token);
-      setUser(resUser.user);
+      setUser({
+        ...resUser.user,
+        user_id: Number(resUser.user.user_id)
+      });
       setToken(token);
 
-     
-      
+
+
 
       /*  const type = Number(resUser.data.user?.type);
  
@@ -98,7 +108,7 @@ const LoginPage = () => {
       <div className="login-card">
         <h2>Entra en tu perfil</h2>
 
-        <form onClick={onSubmit} className="login-form" noValidate>
+        <form onSubmit={onSubmit} className="login-form" noValidate>
           <div className="field">
             <label htmlFor="email">E-mail</label>
             <input
@@ -110,7 +120,7 @@ const LoginPage = () => {
               type="email"
               autoComplete="email"
             />
-            {valErrors.email && <p className="text-danger">{valErrors.email}</p>}
+            {valErrors.email && <p className="error">{valErrors.email}</p>}
           </div>
 
           <div className="field">
@@ -127,7 +137,7 @@ const LoginPage = () => {
 
             {errorMsg && <p className="text-danger">{errorMsg}</p>}
             {valErrors.password && (
-              <p className="text-danger">{valErrors.password}</p>
+              <p className="error">{valErrors.password}</p>
             )}
           </div>
 

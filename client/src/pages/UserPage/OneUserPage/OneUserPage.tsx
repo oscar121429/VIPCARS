@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useAuth } from "../../../context/AuthContext/useAuth";
 import { fetchData } from "../../../helpers/axiosHelper/axiosHelper";
 import type { OneUserResponse,  SocialProfile } from "../../../types/OneUser.types";
@@ -12,6 +12,8 @@ const OneUserPage = () => {
  const [oneUser, setOneUser] = useState<SocialProfile | null>(null);
  const {user_id} = useParams();
  const {token} =  useAuth();
+
+ const navigate = useNavigate();
 
   useEffect(()=>{
     const fetchUser = async()=>{
@@ -58,6 +60,10 @@ const OneUserPage = () => {
       <section className="d-flex justify-content-center py-5">
       <CarCarousel  images={oneUser?.images ?? []}/>
       </section>
+
+      <div className="d-flex justify-content-center py-5 "> 
+      <button className="button_register acept" onClick={()=>navigate(-1)}>Volver</button>
+      </div>
 
     </div>
   )

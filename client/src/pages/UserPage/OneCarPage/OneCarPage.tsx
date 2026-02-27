@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "./OneCarPage.css"
-import { useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 import { useAuth } from '../../../context/AuthContext/useAuth';
 import { fetchData } from '../../../helpers/axiosHelper/axiosHelper';
 import type { OneCarResponse, OneSocialCar } from '../../../types/OneCar.types';
@@ -10,6 +10,8 @@ const OneCarPage = () => {
  const [oneCar, setOneCar] = useState<OneSocialCar | null>(null);
  const {car_id} = useParams();
  const {token} =  useAuth();
+
+ const navigate = useNavigate();
 
   useEffect(()=>{
     const fetchCar = async()=>{
@@ -71,6 +73,10 @@ const OneCarPage = () => {
                 </Table>
       </div>
     </section>
+
+     <div className="d-flex justify-content-center py-5 "> 
+      <button className="button_register acept" onClick={()=>navigate(-1)}>Volver</button>
+      </div>
 
     </div>
   )

@@ -4,10 +4,11 @@ import { useState } from "react";
 import type { Car, UpdateCarResponse } from "../../../types/auth.types";
 import "./EditCarPage.css"
 import { fetchData } from "../../../helpers/axiosHelper/axiosHelper";
+import type { GetCarsByUserResponse } from "../../../types/addCar.types";
 
 const EditCarPage = () => {
   const { car_id } = useParams();
-  const { token, car, setCar } = useAuth();
+  const { token, car, setCar, user } = useAuth();
 
   const selectedCar = car.find(
     c => c.car_id === Number(car_id)
@@ -45,20 +46,20 @@ const EditCarPage = () => {
     e.preventDefault();
     if (!editCar) return;
     try {
-      const res = await fetchData<UpdateCarResponse, Car>({
+       await fetchData<UpdateCarResponse, Car>({
         url: `car/updateCar/${car_id}`,
         method: "PUT",
         data: editCar,
         token
       });
 
-      setCar(prev =>
-        prev.map(c =>
-          c.car_id === Number(res.updatedCar.car_id)
-            ? { ...res.updatedCar, car_id: Number(res.updatedCar.car_id) }
-            : c
-        )
-      );
+      const resCars = await fetchData<GetCarsByUserResponse>({
+  url: `car/getCarsByUser/${user!.user_id}`,
+  method: "GET",
+  token
+});
+
+      setCar(resCars.car);
 
       navigate("/profile");
     } catch (error) {

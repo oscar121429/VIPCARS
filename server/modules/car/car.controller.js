@@ -27,6 +27,54 @@ class CarController {
     }
   }
 
+  getCarsByUser = async (req, res) => {
+    const { user_id } = req.params;
+
+    try {
+
+      const rows = await carDal.getCarsByUser(user_id);
+
+      const cars = {};
+
+      rows.forEach(row => {
+
+        // si no existe ese coche aún lo creamos
+        if (!cars[row.car_id]) {
+          cars[row.car_id] = {
+            car_id: row.car_id,
+            model: row.model,
+            year: row.year,
+            price: row.price,
+            number_of_owners: row.number_of_owners,
+            kilometres: row.kilometres,
+            description: row.description,
+            user_id: row.user_id,
+            images: []
+          };
+        }
+
+        // si hay imagen la añadimos
+        if (row.image_id) {
+          cars[row.car_id].images.push({
+            image_id: row.image_id,
+            file: row.file
+          });
+        }
+
+      });
+
+      const carsArray = Object.values(cars);
+
+      return res.json({
+        car: carsArray
+      });
+
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "Error getting cars" });
+    }
+  };
+
   getImages = async (req, res) => {
     const { car_id } = req.params;
     try {

@@ -1,12 +1,16 @@
+import type {  CarWithImages } from "./auth.types";
+
 
 
 export interface CreateCarDTO {
-  model: string
-  year: number
-  price: number
-  number_of_owners: number
-  kilometres: number
-  description: string
+  car_id:  number;
+  model: string;
+  year: number;
+  price:number;
+  number_of_owners:number;
+  kilometres:number;
+  description: string;
+  user_id:number;
 }
 
 export type CarFormErrors = {
@@ -25,3 +29,9 @@ export interface CreateCarResponse {
 }
 
 export type CarPictures = File[]
+
+
+
+export interface GetCarsByUserResponse {
+  car: CarWithImages[];
+}

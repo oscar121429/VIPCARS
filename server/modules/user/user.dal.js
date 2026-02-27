@@ -2,7 +2,7 @@ import executeQuery from "../../config/db.js";
 
 class UserDal {
 
-  register = async(values)=>{
+  register = async (values) => {
     try {
       let sql = "INSERT INTO users (name_user, last_name, type, city, province, email, password, phone) VALUES (?,?,?,?,?,?,?,?)"
       let result = await executeQuery(sql, values)
@@ -13,7 +13,7 @@ class UserDal {
     }
   }
 
-   verifyEmail = async (email) => {
+  verifyEmail = async (email) => {
     try {
       let sql = "UPDATE users SET is_confirmed = 1 WHERE email = ?";
       let result = await executeQuery(sql, [email]);
@@ -23,7 +23,7 @@ class UserDal {
     }
   };
 
-    findUserByEmail = async (email) => {
+  findUserByEmail = async (email) => {
     try {
       let sql =
         "SELECT user_id, password, is_confirmed FROM users WHERE email = ? AND is_deleted = 0";
@@ -34,7 +34,7 @@ class UserDal {
     }
   };
 
-   userByToken = async (id) => {
+  userByToken = async (id) => {
     try {
       let sql =
         `SELECT 
@@ -56,7 +56,10 @@ class UserDal {
     c.kilometres,
     c.description,
 
-    JSON_ARRAYAGG(g.file) AS pictures
+    JSON_ARRAYAGG(  CASE 
+    WHEN g.file IS NOT NULL 
+    THEN g.file 
+  END) AS pictures
 
 FROM users u
 
@@ -70,9 +73,9 @@ AND g.image_is_deleted = 0
 
 WHERE u.user_id = ?
 
-GROUP BY c.car_id;`;
+GROUP BY c.car_id, u.user_id;`;
       let result = await executeQuery(sql, [id]);
-     
+
       const car = []
       const user = {
         user_id: result[0].user_id,
@@ -86,36 +89,42 @@ GROUP BY c.car_id;`;
         type: result[0].type
       }
 
-       result.forEach(e => {
+      result.forEach(e => {
         if (e.car_id) {
           car.push({
             user_id: e.user_id,
             car_id: e.car_id,
             model: e.model,
             year: e.year,
-            price: e.price,
+            price: Number(e.price),
             number_of_owners: e.number_of_owners,
             kilometres: e.kilometres,
-            description: e.description
+            description: e.description,
+            images: e.pictures
+              ? (typeof e.pictures === "string"
+                ? JSON.parse(e.pictures)
+                : e.pictures
+              ).filter(Boolean).map(file => ({ file }))
+              : []
           })
         }
       })
-     
 
-      return {user, car};
+
+      return { user, car };
     } catch (error) {
       throw error;
     }
   };
 
- 
 
-  editUser = async(values)=>{
+
+  editUser = async (values) => {
     try {
       let sql = 'UPDATE users SET name_user=?, last_name=?, city=?, province=?, phone=? WHERE user_id = ? AND is_deleted = 0'
 
       if (values.length === 7) {
-          sql = 'UPDATE users SET name_user=?, last_name=?, city=?, province=?, phone=?, picture_user=? WHERE user_id = ? AND is_deleted = 0'
+        sql = 'UPDATE users SET name_user=?, last_name=?, city=?, province=?, phone=?, picture_user=? WHERE user_id = ? AND is_deleted = 0'
       }
 
       await executeQuery(sql, values);
@@ -124,7 +133,7 @@ GROUP BY c.car_id;`;
     }
   }
 
-  allUsersCars = async()=>{
+  allUsersCars = async () => {
     try {
       let sql = `SELECT 
     u.user_id,
@@ -148,14 +157,14 @@ WHERE
 GROUP BY 
     c.car_id, u.user_id`
 
-    let result = await executeQuery(sql);
-    return result
+      let result = await executeQuery(sql);
+      return result
     } catch (error) {
       throw error
     }
   }
 
-  userById = async(user_id)=>{
+  userById = async (user_id) => {
     try {
       let sql = `  SELECT 
        u.user_id,
@@ -174,13 +183,13 @@ GROUP BY
    AND u.is_deleted = 0`
       let result = executeQuery(sql, [user_id]);
       return result
-      
+
     } catch (error) {
       throw error
     }
   }
 
- 
+
 
 }
 
