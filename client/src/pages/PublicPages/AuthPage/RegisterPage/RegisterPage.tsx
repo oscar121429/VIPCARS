@@ -43,6 +43,12 @@ const RegisterPage = () => {
       ...prev,
       [name]: value
     }));
+
+    setValErrors(prev => ({
+      ...prev,
+      [name]: ""
+    }));
+
   };
 
   const onSubmit = async (
@@ -52,17 +58,18 @@ const RegisterPage = () => {
 
     try {
       registerSchema.parse(register);
-     
+      setValErrors({});
+      setFetchError("");
 
-      //llamada api
-      const res = await fetchData<typeof register>({
+
+      await fetchData<typeof register>({
         url: "user/register",
         method: "POST",
         data: register,
       });
 
-       setOpenModal(true);
-      navigate('/login')
+      setOpenModal(true);
+      /* navigate('/login') */
 
 
     } catch (error) {
@@ -106,7 +113,7 @@ const RegisterPage = () => {
     <section className='register-page'>
       <div className='register-card'>
         <h2>Registrate</h2>
-        <form className='register-form' onClick={onSubmit}>
+        <form className='register-form' onSubmit={onSubmit}>
 
           <div className="field">
             <label htmlFor="name_user">Nombre</label>
@@ -118,6 +125,9 @@ const RegisterPage = () => {
               autoComplete='given-name'
               placeholder='Introduce tu nombre'
             />
+            {valErrors.name_user && (
+              <p className="error">{valErrors.name_user}</p>
+            )}
           </div>
 
           <div className="field">
@@ -129,6 +139,9 @@ const RegisterPage = () => {
               onChange={handleChange}
               autoComplete='family-name'
               placeholder='Introduce tus apellidos' />
+            {valErrors.last_name && (
+              <p className="error">{valErrors.last_name}</p>
+            )}
           </div>
 
           <div className="field">
@@ -140,6 +153,9 @@ const RegisterPage = () => {
               onChange={handleChange}
               autoComplete='email'
               placeholder='Introduce tu Email' />
+            {valErrors.email && (
+              <p className="error">{valErrors.email}</p>
+            )}
           </div>
 
           <div className="field">
@@ -151,6 +167,9 @@ const RegisterPage = () => {
               onChange={handleChange}
               autoComplete='tel'
               placeholder='Introduce tu Teléfono' />
+            {valErrors.phone && (
+              <p className="error">{valErrors.phone}</p>
+            )}
           </div>
 
           <div className="field">
@@ -160,8 +179,11 @@ const RegisterPage = () => {
               name='city'
               value={register.city}
               onChange={handleChange}
-              autoComplete='addres-level2'
+              autoComplete='address-level2'
               placeholder='Introduce Ciudad' />
+            {valErrors.city && (
+              <p className="error">{valErrors.city}</p>
+            )}
           </div>
 
           <div className="field">
@@ -173,6 +195,9 @@ const RegisterPage = () => {
               onChange={handleChange}
               autoComplete='address-level1'
               placeholder='Introduce Provincia' />
+            {valErrors.province && (
+              <p className="error">{valErrors.province}</p>
+            )}
           </div>
 
           <div className="field">
@@ -185,6 +210,9 @@ const RegisterPage = () => {
               autoComplete='new-password'
               type="password"
               placeholder='Introduce una contraseña' />
+            {valErrors.password && (
+              <p className="error">{valErrors.password}</p>
+            )}
           </div>
 
           <div className="field">
@@ -197,6 +225,9 @@ const RegisterPage = () => {
               autoComplete='new-password'
               type="password"
               placeholder='Repite la contraseña' />
+            {valErrors.rep_password && (
+              <p className="error">{valErrors.rep_password}</p>
+            )}
           </div>
 
           <div className="buttons">
@@ -215,7 +246,7 @@ const RegisterPage = () => {
 
         </form>
 
-       {openModal && (
+        {openModal && (
           <ModalVerifyEmail
             onClose={() => {
               setOpenModal(false);

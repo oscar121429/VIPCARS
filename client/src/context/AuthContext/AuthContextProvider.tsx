@@ -13,50 +13,77 @@ type Props = {
 export const AuthContextProvider = ({ children }: Props) => {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
-   const [car, setCar] = useState<Car[]>([]);
+  const [car, setCar] = useState<Car[]>([]);
 
-  
-  
+
+
   useEffect(() => {
 
-  const tokenLS = localStorage.getItem("token");
+    const tokenLS = localStorage.getItem("token");
+    if (tokenLS) {
+      const fetchUser = async () => {
 
-  const fetchUser = async () => {
 
-    if (!tokenLS) {
-      setUser(null);
-      setToken(null);
-      setCar([]);
-      return;
+        try {
+
+          const resUser = await fetchData<UserByTokenResponse>({
+            url: "user/userByToken",
+            method: "GET",
+            token: tokenLS,
+          });
+
+          setToken(tokenLS);
+          setUser(resUser.user);
+          setCar(
+            resUser.car.map((c) => ({
+              ...c,
+              price: Number(c.price)
+            }))
+          );
+
+        } catch (error) {
+          console.log(error);
+
+        }
+      };
+
+      fetchUser();
     }
+
+  }, []);
+
+  useEffect(() => {
+
+  const fetchCars = async () => {
+
+    if (!user || !token) return;
 
     try {
 
-      const resUser = await fetchData< UserByTokenResponse>({
-        url: "user/userByToken",
+      const resCars = await fetchData<{car: Car[]}>({
+        url: `car/getCarsByUser/${user.user_id}`,
         method: "GET",
-        token: tokenLS,
+        token
       });
 
-      setToken(tokenLS);
-      setUser(resUser.user);
-      setCar(resUser.car);
+      setCar(
+        resCars.car.map((c) => ({
+          ...c,
+          price: Number(c.price)
+        }))
+      );
 
     } catch (error) {
       console.log(error);
-      setUser(null);
-      setToken(null);
-      setCar([]);
-      localStorage.removeItem("token");
     }
   };
 
-  fetchUser();
+  fetchCars();
 
-}, []);
+}, [user]);
 
 
-    const logout = () => {
+  const logout = () => {
     setUser(null);
     setToken(null);
     setCar([]);
@@ -64,15 +91,15 @@ export const AuthContextProvider = ({ children }: Props) => {
   };
 
   return (
-    <AuthContext.Provider value={{ 
-      user, 
+    <AuthContext.Provider value={{
+      user,
       setUser,
       token,
       setToken,
       car,
       setCar,
-      logout 
-      }}>
+      logout
+    }}>
       {children}
     </AuthContext.Provider>
   );

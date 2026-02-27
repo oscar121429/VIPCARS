@@ -47,6 +47,24 @@ class CarDal {
 
   }
 
+  getCarsByUser = async(user_id)=>{
+    try {
+      let sql = `SELECT 
+  c.*,
+  ci.image_id,
+  ci.file
+FROM car c
+LEFT JOIN gallery ci 
+ON c.car_id = ci.car_id
+WHERE c.user_id = ?
+AND c.car_is_deleted = 0`
+      let result = await executeQuery(sql, [user_id]);
+      return result
+    } catch (error) {
+      throw error
+    }
+  }
+
   getImages = async (car_id) => {
     try {
       let sql = 'SELECT * FROM gallery WHERE image_is_deleted = 0 AND car_id = ?'

@@ -24,7 +24,6 @@
   text-align: center;
   margin-bottom: 2.6rem;
   color: #246B64;
-  font-family: "Raleway", sans-serif;
   font-weight: bold;
   font-size: 2.4rem;
   letter-spacing: 0.45em;
@@ -68,10 +67,12 @@
   box-shadow: 0 6px 18px rgba(107, 179, 167, 0.2);
 }
 
-.text-danger {
+.error {
   font-size: 0.85rem;
+  font-weight: bolder;
   margin-top: 4px;
   text-align: center;
+  color: red;
 }
 
 .text-center {
@@ -131,3 +132,49 @@
   font-size: 1.25rem;
 }
 
+@media (max-width: 768px) {
+
+  .register-page {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    align-items: center;
+  }
+
+  .register-card {
+    width: 95%;
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+    box-shadow:
+      0 0 0 2px #246B64,
+      2px 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .register-card h2 {
+    font-size: 1.4rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 1.6rem;
+  }
+
+  .field input {
+    max-width: 100%;
+    font-size: 13px;
+    padding: 9px 12px;
+  }
+
+  .buttons {
+    flex-direction: column;
+    gap: 10px;
+    margin: 1.6rem 0;
+  }
+
+  .button_register {
+    width: 100%;
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .register-phrase {
+    font-size: 1rem;
+  }
+
+}

@@ -130,6 +130,9 @@ class UserController {
         car: result.car
       });
 
+      console.log(".....................................", result.car);
+      
+
 
 
 

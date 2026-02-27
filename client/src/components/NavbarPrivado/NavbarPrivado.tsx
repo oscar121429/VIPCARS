@@ -37,7 +37,9 @@ export const NavbarPrivado = () => {
                 >
                 {user?.name_user[0].toUpperCase()} </div>}
             </div>
-            <Button className='nav-btn m-2' onClick={logout}>LogOut</Button>
+            <Button className='nav-btn m-2' onClick={logout}>
+              <i className="bi bi-box-arrow-right "></i>
+            </Button>
           </div>
 
 

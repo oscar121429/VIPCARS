@@ -1,19 +1,21 @@
 import React, { useState } from 'react'
 import "./AddCarPage.css"
-import type { CarFormErrors, CarPictures, CreateCarDTO, CreateCarResponse } from '../../../types/addCar.types';
+import type { CarFormErrors, CarPictures, CreateCarDTO, CreateCarResponse, GetCarsByUserResponse } from '../../../types/addCar.types';
 import { useNavigate } from 'react-router';
 import { validateCar } from '../../../schemas/AddCarScherma';
 import { fetchData } from '../../../helpers/axiosHelper/axiosHelper';
 import { useAuth } from '../../../context/AuthContext/useAuth';
-import type { Car } from '../../../types/auth.types';
+
 
 const initialValue: CreateCarDTO = {
+  car_id: 0,
   model: '',
   year: new Date().getFullYear(),
   price: 0,
   number_of_owners: 0,
   kilometres: 0,
-  description: ''
+  description: '',
+  user_id: 0,
 }
 
 const AddCarPage = () => {
@@ -21,7 +23,7 @@ const AddCarPage = () => {
   const [pictures, setPictures] = useState<CarPictures>([]);
   const [errors, setErrors] = useState<CarFormErrors>({})
 
-  const { token, user, setCar } = useAuth();
+  const { token, user, car, setCar } = useAuth();
 
   const navigate = useNavigate();
 
@@ -93,19 +95,17 @@ const AddCarPage = () => {
       })
 
       //pendiente el seteo de car
-      // construir objeto Car mínimo con el id devuelto
-      const createdCar = {
-        car_id: res.carId,
-        model: newCar.model,
-        year: newCar.year,
-        price: newCar.price,
-        number_of_owners: newCar.number_of_owners,
-        kilometres: newCar.kilometres,
-        description: newCar.description,
-        user_id: Number(user?.user_id ?? 0)
-      } as Car
+      if (!user) return;
 
-      setCar(prev => [...prev, createdCar])
+      // 🔥 VUELVE A PEDIR LOS COCHES REALES
+      const resCars = await fetchData<GetCarsByUserResponse>({
+        url: `car/getCarsByUser/${user!.user_id}`,
+        method: "GET",
+        token
+      });
+
+      setCar(resCars.car);
+
 
       navigate('/profile')
 
