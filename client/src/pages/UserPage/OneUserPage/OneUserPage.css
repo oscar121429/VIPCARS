@@ -19,41 +19,41 @@
   box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
-.infoTable {
+.infoTableU {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0 8px;
 }
 
-.infoTable tr {
+.infoTableU tr {
   background: rgba(255,255,255,0.45);
   border-radius: 12px;
   overflow: hidden;
   transition: 0.2s ease;
 }
 
-.infoTable tr:hover {
+.infoTableU tr:hover {
   transform: scale(1.02);
   background: rgba(255,255,255,0.65);
 }
 
-.infoTable td {
+.infoTableU td {
   padding: 12px 14px;
   border-bottom: none;
 }
 
-.infoTable tr:last-child td {
+.infoTableU tr:last-child td {
   border-bottom: none;
 }
 
-.infoKey {
+.infoKeyU {
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: #4f4038;
 }
 
-.infoValue {
+.infoValueU {
   text-align: right;
   font-size: 15px;
   font-weight: 700;
@@ -120,29 +120,31 @@
     padding: 14px 16px;
   }
 
-  .infoTable {
+  .infoTableU {
     width: 100%;
   }
 
-    .infoTable tr {
+    .infoTableU tr {
     display: flex;
     flex-direction: column;
     padding: 8px 12px;
+    align-items: center;
+  text-align: center;
   }
 
-  .infoTable td {
+  .infoTableU td {
     font-size: 14px;
     padding: 6px 2px;
     word-break: break-word;
   }
 
-  .infoKey {
-    text-align: left;
-    margin-bottom: 3px;
+  .infoKeyU {
+   text-align: center;
+   margin: 5px;
   }
 
-  .infoValue {
-    text-align: right;
+  .infoValueU {
+   text-align: center;
   }
 
   .button_register {

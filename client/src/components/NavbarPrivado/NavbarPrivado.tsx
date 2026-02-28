@@ -21,7 +21,7 @@ export const NavbarPrivado = () => {
             {/* solo admin */}
             {isAdmin && (
               <Nav.Link as={Link} to={"/manage"}>
-                Administrar
+                Dashboard
               </Nav.Link>
             )}
             <Nav.Link as={Link} to={"/social"}>Red Social</Nav.Link>

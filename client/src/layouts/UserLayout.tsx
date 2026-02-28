@@ -1,6 +1,7 @@
 
 import { Outlet } from 'react-router'
 import { NavbarPrivado } from '../components/NavbarPrivado/NavbarPrivado'
+import { Footer } from '../components/Footer/Footer'
 
 export const UserLayout = () => {
   return (
@@ -11,8 +12,8 @@ export const UserLayout = () => {
     <main className='main-user'>
       <Outlet/>
     </main>
-    <footer  className='footer-user'>
-      <h2>Footer user</h2>
+    <footer  /* className='footer-user' */>
+      <Footer/>
     </footer>
    </>
   )

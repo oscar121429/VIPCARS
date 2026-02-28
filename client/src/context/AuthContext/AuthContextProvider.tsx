@@ -34,13 +34,7 @@ export const AuthContextProvider = ({ children }: Props) => {
 
           setToken(tokenLS);
           setUser(resUser.user);
-          setCar(
-            resUser.car.map((c) => ({
-              ...c,
-              price: Number(c.price)
-            }))
-          );
-
+    
         } catch (error) {
           console.log(error);
 

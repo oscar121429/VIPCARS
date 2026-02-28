@@ -22,12 +22,21 @@ export const CardCar = ({car}:Props) => {
 
       
       <div className="user-info">
-        <img
+        {car?.picture_user ? (  
+          <img
         onClick={()=>navigate(`/oneUser/${car.user_id}`)}
           className="user-avatar"
           src={`${import.meta.env.VITE_SERVER_IMAGES}/users/${car.picture_user}`}
           alt="user"
         />
+      ) :  (
+                   <img
+                    onClick={()=>navigate(`/oneUser/${car.user_id}`)}
+                  className="user-avatar"
+                  src={`/images/Profile/IconDefect.png`}
+                  alt="Imagen de perfil por defecto"
+                />
+                )}
         <p className="user-name">
           {car.name_user} {car.last_name}
         </p>

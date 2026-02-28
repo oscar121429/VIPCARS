@@ -37,17 +37,25 @@ const OneUserPage = () => {
   return (
     <div>
       <section className="userInfoContainer">
-         <img
+      {oneUser?.picture_user ? (  
+        <img
                   className="userPhoto"
                   src={`${import.meta.env.VITE_SERVER_IMAGES}/users/${oneUser?.picture_user}`}
                   alt="Imagen de perfil"
                 />
+                ) : (
+                   <img
+                  className="userPhoto"
+                  src={`/images/Profile/IconDefect.png`}
+                  alt="Imagen de perfil por defecto"
+                />
+                )}
          <div className="infoTableWrapU">
-              <Table className="infoTable" borderless>
+              <Table className="infoTableU" borderless>
                 <tbody>
                   <tr>
-                    <td className="infoKey">Coleccionista</td>
-                    <td className="infoValue">
+                    <td className="infoKeyU">Coleccionista</td>
+                    <td className="infoValueU">
                       {oneUser?.name_user} {oneUser?.last_name}
                     </td>
                   </tr>
