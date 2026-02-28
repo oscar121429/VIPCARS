@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import { useAuth } from '../../../context/AuthContext/useAuth'
 import { fetchData } from '../../../helpers/axiosHelper/axiosHelper';
 import type { AdminUser, AdminUsersResponse } from '../../../types/adminUser.types';
@@ -54,9 +54,9 @@ const ManagePage = () => {
   return (
     <section className='d-flex justify-content-center py-5'>
       <div className='adminUsersWrap'>
-        <Table className="adminTable">
+        <table className="adminTable" >
 
-          {/* CABECERA */}
+         
           <thead >
             <tr>
               <th>CLIENTE</th>
@@ -66,14 +66,14 @@ const ManagePage = () => {
             </tr>
           </thead>
 
-          {/* CONTENIDO DINÁMICO */}
+       
           <tbody>
 
             {allUsers.map((user) => (
 
               <tr key={user.user_id}>
 
-                {/* CLIENTE */}
+               
                 <td className="clientCell">
 
                   <div className="clientInfo">
@@ -97,17 +97,14 @@ const ManagePage = () => {
 
                 </td>
 
-                {/* TELÉFONO */}
                 <td>
                   {user.phone}
                 </td>
 
-                {/* EMAIL */}
                 <td>
                   {user.email}
                 </td>
 
-                {/* ADMINISTRAR */}
                 <td>
 
                   <button
@@ -124,7 +121,7 @@ const ManagePage = () => {
 
           </tbody>
 
-        </Table>
+        </table>
 
       </div>
 

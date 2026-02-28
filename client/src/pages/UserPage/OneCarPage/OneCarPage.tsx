@@ -34,10 +34,15 @@ const OneCarPage = () => {
 
   return (
     <div className='OneCarPage'>
-      <section className='heroImageWrap' >
-      <img src={`${import.meta.env.VITE_SERVER_IMAGES}/cars/${oneCar?.main_image}`} alt="imagen del coche "
-      className='heroImage' />
-      </section>
+     <section className='heroImageWrap'>
+  {oneCar?.main_image && (
+    <img
+      src={`${import.meta.env.VITE_SERVER_IMAGES}/cars/${oneCar.main_image}`}
+      alt="imagen del coche"
+      className='heroImage'
+    />
+  )}
+</section>
 
     <section  className="CarInfoContainer">
       <div className="infoTableWrapC">

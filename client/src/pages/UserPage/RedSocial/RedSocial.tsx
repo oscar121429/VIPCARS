@@ -29,7 +29,7 @@ const RedSocial = () => {
 
  },[])
 
- console.log("pppppppppppppppp que llega", allCars);
+ 
  
  
 

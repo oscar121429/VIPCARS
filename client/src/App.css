@@ -1,16 +1,8 @@
 .main-public{
-  min-height: calc(100vh - 143px);
+  min-height: calc(100vh - 449px);
 }
-.footer-public{
-  height: 60px;
-  background-color: #333333;
-}
+
 
 .main-user{
   min-height: calc(100vh - 145px);
-}
-.footer-user{
-  height: 60px;
-  background-color: #333333;
-  color: white;
 }

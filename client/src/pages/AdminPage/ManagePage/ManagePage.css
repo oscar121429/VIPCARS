@@ -1,4 +1,4 @@
-/* CONTENEDOR GENERAL */
+
 
 .adminUsersWrap {
   width: 90%;
@@ -6,17 +6,17 @@
   margin: 60px auto;
 }
 
-/* TABLA */
+
 
 .adminTable {
   width: 100%;
   border-collapse: collapse;
-  background: white;
+  background: rgb(227, 226, 226);
   border-radius: 12px;
   overflow: hidden;
 }
 
-/* CABECERA */
+
 
 .adminTable thead {
   background: #A6C8B7;
@@ -29,7 +29,7 @@
   color: #4b4b4b;
 }
 
-/* FILAS */
+
 
 .adminTable td {
   padding: 10px;
@@ -41,7 +41,7 @@
   border-bottom: none;
 }
 
-/* CLIENTE (AVATAR + NOMBRE) */
+
 
 .clientCell {
   vertical-align: middle;
@@ -53,7 +53,7 @@
   gap: 12px;
 }
 
-/* AVATAR */
+
 
 .clientAvatar {
   width: 36px;
@@ -63,7 +63,7 @@
   background: #ddd;
 }
 
-/* BOTÓN BLOQUEAR */
+
 
 .blockBtn {
   background: #e5bcbc;
