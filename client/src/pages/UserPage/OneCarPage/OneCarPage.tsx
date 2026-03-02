@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import "./OneCarPage.css"
 import { useNavigate, useParams } from 'react-router'
 import { useAuth } from '../../../context/AuthContext/useAuth';

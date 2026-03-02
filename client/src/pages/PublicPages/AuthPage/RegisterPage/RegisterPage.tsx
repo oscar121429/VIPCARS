@@ -69,7 +69,7 @@ const RegisterPage = () => {
       });
 
       setOpenModal(true);
-      /* navigate('/login') */
+     
 
 
     } catch (error) {
