@@ -75,15 +75,6 @@ const LoginPage = () => {
       });
       setToken(token);
 
-
-
-
-      /*  const type = Number(resUser.data.user?.type);
- 
-       if (type === 1) navigate("/admin");
-       else if (type === 2) navigate("/worker/profile");
-       else navigate("/profile"); */
-
     } catch (error) {
       if (error instanceof ZodError) {
         const fieldsErrors: LoginErrors = {};

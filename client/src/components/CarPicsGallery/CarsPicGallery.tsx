@@ -40,6 +40,7 @@ export const CarsPicGallery = ({ car_id }: CarPicsGalleryProps) => {
     fileInputRef.current?.click();
     setShowform(true);
   };
+  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewPic(e.target.files);
   };
