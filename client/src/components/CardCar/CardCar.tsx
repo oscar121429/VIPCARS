@@ -13,11 +13,13 @@ export const CardCar = ({car}:Props) => {
 
       
       <div className="car-header-img">
-        <img 
-        onClick={()=>navigate(`/oneCar/${car.car_id}`)}
-          src={`${import.meta.env.VITE_SERVER_IMAGES}/cars/${car.file}`} 
-          alt="car"
-        />
+        
+          <img
+          onClick={()=>navigate(`/oneCar/${car.car_id}`)}
+            src={`${import.meta.env.VITE_SERVER_IMAGES}/cars/${car.file}`}
+            alt="car"
+          />
+      
       </div>
 
       

@@ -14,7 +14,7 @@ class AdminDal {
       is_deleted
     FROM users
     WHERE type = 3
-    AND is_deleted = 0`
+    `
 
     let result = await executeQuery(sql);
     return result

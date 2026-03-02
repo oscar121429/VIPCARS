@@ -2,7 +2,6 @@ import  { useEffect, useState } from 'react'
 import { useAuth } from '../../../context/AuthContext/useAuth'
 import { fetchData } from '../../../helpers/axiosHelper/axiosHelper';
 import type { AdminUser, AdminUsersResponse } from '../../../types/adminUser.types';
-import { Table } from 'react-bootstrap';
 import "./ManagePage.css"
 
 const ManagePage = () => {

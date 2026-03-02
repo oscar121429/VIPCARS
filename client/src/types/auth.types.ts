@@ -31,3 +31,8 @@ export interface UpdateCarResponse {
   message: string;
   updatedCar: Car;
 }
+
+export interface UpdateUserResponse {
+  message: string;
+  newAvatar: string;
+}

@@ -9,7 +9,7 @@ import "./UserCarsGallery.css"
 export const UserCarsGallery = () => {
  const {car, setCar, token} = useAuth();
  const navigate = useNavigate();
- console.log("queeee vieneee en car", car);
+ 
  
  const delLogicCar = async(car_id: Car["car_id"] )=>{
   try {

@@ -77,7 +77,7 @@ export const CarsPicGallery = ({ car_id }: CarPicsGalleryProps) => {
     )=>{
     const data = {image_id, car_id, filename};
     try {
-      let res = await fetchData({
+       await fetchData({
         url:'car/delImage',
         method:'POST',
         data: data,
@@ -96,13 +96,15 @@ export const CarsPicGallery = ({ car_id }: CarPicsGalleryProps) => {
       {images.map((img) => (
         <div key={img.image_id} className="img-wrapper">
 
-          <img
-            className="car-image"
-            src={`${import.meta.env.VITE_SERVER_IMAGES}/cars/${img.file}`}
-            alt=""
-          />
+          <div className="div-img">
+            <img
+              className="car-image"
+              src={`${import.meta.env.VITE_SERVER_IMAGES}/cars/${img.file}`}
+              alt=""
+            />
+          </div>
 
-          {/*  ICONO BORRAR */}
+          
           <i className="bi bi-trash delete-icon delete-img-icon"
           onClick={()=>deleteImg(img.image_id, img.file)}
           >
