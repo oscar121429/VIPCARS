@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router'
 import "./EditUserPage.css"
 import { useAuth } from '../../../context/AuthContext/useAuth';
 import { useEffect, useState } from 'react';
-import type { User } from '../../../types/auth.types';
+import type { UpdateUserResponse, User } from '../../../types/auth.types';
 import { fetchData } from '../../../helpers/axiosHelper/axiosHelper';
 
 const EditUserPage = () => {
@@ -42,12 +42,15 @@ const EditUserPage = () => {
         newFormData.append("img", avatar);
       }
 
-      const res = await fetchData<FormData, { message: string; newAvatar?: string }>({
+      const res = await fetchData< UpdateUserResponse>({
         url: 'user/editUser',
         method: 'PUT',
-        data: newFormData,  // Usar el FormData, no editUser
+        data: newFormData, 
         token
       });
+
+     
+      
 
       if (res) {
         const baseUser = editUser as User;
@@ -129,13 +132,17 @@ const EditUserPage = () => {
               placeholder='Introduce Provincia' />
           </div>
 
-          <div className="field">
-            <label htmlFor="picture_user">Actualizar foto de perfil</label>
+          <div className="field file-input">
+            <label htmlFor="picture_user" className="file-label">
+              <i className="bi bi-card-image"></i>
+            </label>
+
             <input
-              id='picture_user'
-              name='avatar'
-              type='file'
+              id="picture_user"
+              name="avatar"
+              type="file"
               onChange={handleChange}
+              className="hidden-input"
             />
           </div>
 

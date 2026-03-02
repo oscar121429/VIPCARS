@@ -23,7 +23,7 @@ const AddCarPage = () => {
   const [pictures, setPictures] = useState<CarPictures>([]);
   const [errors, setErrors] = useState<CarFormErrors>({})
 
-  const { token, user, car, setCar } = useAuth();
+  const { token, user,  setCar } = useAuth();
 
   const navigate = useNavigate();
 
@@ -34,7 +34,7 @@ const AddCarPage = () => {
     const target = e.target
     const name = target.name as keyof CreateCarDTO
 
-    //  Caso imágenes
+    
     if (target instanceof HTMLInputElement && target.type === 'file') {
 
       if (!target.files) return
@@ -42,7 +42,7 @@ const AddCarPage = () => {
       return
     }
 
-    //  Caso normal
+    
     const value = target.value
 
     setNewCar(prev => ({
@@ -67,7 +67,7 @@ const AddCarPage = () => {
 
     try {
 
-      //  VALIDACIÓN
+      
       const validationErrors = validateCar(newCar, pictures)
 
       if (Object.keys(validationErrors).length > 0) {
@@ -77,27 +77,27 @@ const AddCarPage = () => {
 
       const formData = new FormData()
 
-      //  OBJETO COMO JSON
+      
       formData.append("newCar", JSON.stringify(newCar));
 
-      //  IMÁGENES
+     
       if (pictures && pictures.length > 0) {
         for (const elem of pictures) {
           formData.append("img", elem)
         }
       }
 
-      const res = await fetchData<CreateCarResponse, FormData>({
+       await fetchData<CreateCarResponse, FormData>({
         url: "car/newCar",
         method: "POST",
         data: formData,
         token
       })
 
-      //pendiente el seteo de car
+     
       if (!user) return;
 
-      // 🔥 VUELVE A PEDIR LOS COCHES REALES
+      
       const resCars = await fetchData<GetCarsByUserResponse>({
         url: `car/getCarsByUser/${user!.user_id}`,
         method: "GET",
@@ -193,14 +193,17 @@ const AddCarPage = () => {
             {errors.description && <span className="error">{errors.description}</span>}
           </div>
 
-          <div className="field">
-            <label htmlFor="images">Añadir foto</label>
+          <div className="field file-input">
+            <label htmlFor="images" className="file-label">
+              <i className="bi bi-card-image" ></i>
+            </label>
             <input
               id='images'
               name='img'
               type='file'
               multiple
               onChange={handleChange}
+              className="hidden-input"
             />
             {errors.pictures && <span className="error">{errors.pictures}</span>}
           </div>

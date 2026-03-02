@@ -157,6 +157,7 @@ class UserController {
         message: "update oki",
         newAvatar: req.file?.filename
       })
+      
     } catch (error) {
       console.log(error);
       res.status(500).json(error);

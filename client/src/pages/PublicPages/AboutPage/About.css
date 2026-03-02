@@ -7,6 +7,7 @@
 .about__text h2,
 .about__text p {
   text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+  
 }
 
 .about__block {
@@ -25,7 +26,7 @@
   background-repeat: no-repeat;
 }
 
-/* ====== IMÁGENES ====== */
+
 
 .about__img--1 {
   background-image: url("/images/About/about1.jpg");
@@ -35,7 +36,7 @@
   background-image: url("/images/About/about2.jpg");
 }
 
-/* ====== OVERLAY ====== */
+
 
 .about__block::before {
   content: "";
@@ -53,7 +54,7 @@
 }
 
 
-/* ====== TEXTO ====== */
+
 
 .about__text {
   position: relative;
@@ -74,7 +75,7 @@
   line-height: 1.6;
 }
 
-/* ====== TEXTO A LA DERECHA SOLO EN LA PRIMERA ====== */
+
 
 .about__block--right {
   justify-content: flex-end;

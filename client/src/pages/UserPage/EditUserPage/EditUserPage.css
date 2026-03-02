@@ -131,6 +131,38 @@
   font-size: 1.25rem;
 }
 
+.hidden-input {
+  display: none;
+}
+
+.file-label {
+  cursor: pointer;
+  font-size: 30px;
+  color: #6c757d;
+  transition: 0.3s;
+}
+
+.file-label:hover {
+  color: #246B64;
+}
+
+.file-label {
+  width: 60px;
+  height: 60px;
+  background: #f8f9fa;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 24px;
+  border: 1px solid #dee2e6;
+}
+
+.file-label:hover {
+  background: #e9ecef;
+}
+
 @media (max-width: 768px) {
 
   .register-page {

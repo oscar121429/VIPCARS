@@ -46,18 +46,21 @@ const EditCarPage = () => {
     e.preventDefault();
     if (!editCar) return;
     try {
-       await fetchData<UpdateCarResponse, Car>({
+      await fetchData<UpdateCarResponse>({
         url: `car/updateCar/${car_id}`,
         method: "PUT",
         data: editCar,
         token
       });
 
+
+
+
       const resCars = await fetchData<GetCarsByUserResponse>({
-  url: `car/getCarsByUser/${user!.user_id}`,
-  method: "GET",
-  token
-});
+        url: `car/getCarsByUser/${user!.user_id}`,
+        method: "GET",
+        token
+      });
 
       setCar(resCars.car);
 
@@ -84,7 +87,7 @@ const EditCarPage = () => {
               onChange={handleChange}
               placeholder='Introduce el modelo'
             />
-            {/*   {errors.model && <span className="error">{errors.model}</span>} */}
+          
           </div>
 
           <div className="field">
@@ -96,7 +99,7 @@ const EditCarPage = () => {
               value={editCar?.year}
               onChange={handleChange}
               placeholder='Introduce año de matriculación' />
-            {/*  {errors.year && <span className="error">{errors.year}</span>} */}
+           
           </div>
 
 
@@ -110,7 +113,7 @@ const EditCarPage = () => {
               value={editCar?.price}
               onChange={handleChange}
               placeholder='Introduce el precio' />
-            {/*   {errors.price && <span className="error">{errors.price}</span>} */}
+           
           </div>
 
           <div className="field">
@@ -122,7 +125,7 @@ const EditCarPage = () => {
               value={editCar?.number_of_owners}
               onChange={handleChange}
               placeholder='Introduce el número de propietarios' />
-            {/*   {errors.number_of_owners && <span className="error">{errors.number_of_owners}</span>} */}
+           
           </div>
 
           <div className="field">
@@ -134,7 +137,7 @@ const EditCarPage = () => {
               value={editCar?.kilometres}
               onChange={handleChange}
               placeholder='Kilómetros' />
-            {/*  {errors.kilometres && <span className="error">{errors.kilometres}</span>} */}
+          
           </div>
 
           <div className="field">
@@ -145,7 +148,7 @@ const EditCarPage = () => {
               value={editCar?.description}
               onChange={handleChange}
               placeholder='Descripción del coche' />
-            {/*   {errors.description && <span className="error">{errors.description}</span>} */}
+            
           </div>
 
 

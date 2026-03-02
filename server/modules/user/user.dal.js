@@ -127,7 +127,8 @@ GROUP BY c.car_id, u.user_id;`;
         sql = 'UPDATE users SET name_user=?, last_name=?, city=?, province=?, phone=?, picture_user=? WHERE user_id = ? AND is_deleted = 0'
       }
 
-      await executeQuery(sql, values);
+     await executeQuery(sql, values);
+     
     } catch (error) {
       throw error
     }
